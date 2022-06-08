@@ -29,6 +29,10 @@ class CustomerController extends Controller
         $data = User::where('id',$id)->first();
         return view('customer.edit_cust', compact('data'));
     }
+    // public function edit($id){
+    //     $data = User::where('id',$id)->first();
+    //     return view('customer.edit_cust', compact('data'));
+    // }
 
     public function update($id,User $user, Request $request){
         $simpan = $user->where('id',$id)->update([
