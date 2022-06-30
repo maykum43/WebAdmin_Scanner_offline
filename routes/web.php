@@ -48,6 +48,7 @@ Route::post('/update_user/{id}','CustomerController@update')->name('update_user'
 
 //rubah status
 Route::get('/ubahstatus/{id_rwsn}', 'RWTSNController@UpdateSelesai')->name('update_status');
+Route::get('/approve/{id}', 'CustomerController@Approve')->name('Approve');
 
 //delete
 Route::get('/deleteSn/{id}', 'SNController@softDelete')->name('delete_sn');

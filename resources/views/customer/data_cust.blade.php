@@ -19,7 +19,7 @@
                 </a>
             </div>
             <!-- /.card-header -->
-            <div class="card-body p-0">
+            <div class="card-body">
                 @if (session('status'))
                 <div class="alert alert-success" role="alert">
                     {{ session('status') }}
@@ -64,9 +64,19 @@
                             <td>{{ $data->name}}</td>
                             <td>{{ $data->phone}}</td>
                             <td>{{ $data->status}}</td>
+                            {{-- <td>
+                                <div class="form-group">
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="statusSwitch">
+                                        <label class="custom-control-label" for="statusSwitch">{{ $data->status}}</label>
+                                    </div>
+                                </div>
+                            </td> --}}
                             <td>
                                 <div class="btn-group">
-                                    <a href="{{ route('edit_user',$data->id)}}" class="btn btn-warning btn-sm">Edit</a>
+                                    <a href="{{ route('Approve',$data->id)}}" class="btn btn-success btn-sm">Setujui</a>
+                                    <a href="{{ route('edit_user',$data->id)}}"
+                                        class="btn btn-warning btn-sm">Detail</a>
                                     <a href="{{ route('Hdelete_user',$data->id)}}"
                                         class="btn btn-danger btn-sm">Hapus</a>
                                 </div>
@@ -80,5 +90,23 @@
             </div>
         </div>
     </div>
+    <script>
+        $(function() {
+          $('.custom-control-input').change(function() {
+              var status = $(this).prop('Disetujui') == true ? 1 : 0; 
+              var id = $(this).data('id'); 
+               
+              $.ajax({
+                  type: "GET",
+                  dataType: "json",
+                  url: '/Approve',
+                  data: {'status': status, 'id': id},
+                  success: function(data){
+                    console.log(data.success)
+                  }
+              });
+          })
+        })
+      </script>
 </section>
 @endsection

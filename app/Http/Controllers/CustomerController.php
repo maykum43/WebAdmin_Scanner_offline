@@ -20,7 +20,7 @@ class CustomerController extends Controller
                         ->orWhere('email','LIKE','%'.$request->cari_user.'%')
                         ->paginate(10);
         }else{
-            $cust = User::orderBy('created_at','desc')->paginate(10);
+            $cust = User::where('role','User')->orderBy('created_at','desc')->paginate(10);
         }
         return view('customer.data_cust', compact('cust'));
     }
@@ -98,5 +98,17 @@ class CustomerController extends Controller
         ]));
 
         return redirect()->route('customer')->with('success','Data berhasil di simpan');
+    }
+
+    public function Approve($id, User $user){
+        
+        $simpan = $user->where('id',$id)->update([
+            'status' => 'Disetujui',
+        ]);
+
+        if(!$simpan){
+            return redirect()->route('customer')->with('error','User gagal disetujui');
+        }
+        return redirect()->route('customer')->with('success','User berhasil disetujui');
     }
 }

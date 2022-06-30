@@ -16,7 +16,17 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','phone','alamat','norek','nama_bank','atas_nama','nama_akun_ol','foto'
+        'name', 
+        'email', 
+        'password',
+        'phone',
+        'alamat',
+        'norek',
+        'nama_bank',
+        'atas_nama',
+        'nama_akun_ol',
+        'foto',
+        'status'
     ];
     public function sns(){
     	return $this->hasMany('App\SnProduk');

@@ -23,22 +23,27 @@ class UserController extends Controller {
 
         // dd($request->all());die();
         $user=User::where('email', $request->email)->first();
+        // Status User
+        // $status=User::where('status', $request->status);
 
         if($user) {
-
             if(password_verify($request->password, $user->password)) {
-                return response()->json([ 
-                    'success'=> 1,
-                    'message'=> 'Selamat Datang '.$user->name,
-                    // dengan ID : ".$user->id,
-                    'user'=> $user
-                ]);
+                if ($user->status == 'Disetujui') {
+                    return response()->json([ 
+                        'success'=> 1,
+                        'message'=> 'Selamat Datang '.$user->name,
+                        // dengan ID : ".$user->id,
+                        'user'=> $user
+                    ]);    
+                }else{
+                    return $this->error('Menunggu persetujuan Admin');
+                }
+            }else{
+                return $this->error('Password anda salah');
             }
-
-            return $this->error('Password anda salah');
+        }else{
+            return $this->error('Email tidak ditemukan ');
         }
-
-        return $this->error('Email tidak ditemukan ');
     }
 
     public function register(Request $request) {
@@ -63,16 +68,16 @@ class UserController extends Controller {
 
             if($user) {
                 return response()->json([ 'success'=> 1,
-                    'message'=> 'Register Berhasil',
+                    'message'=> 'Register Berhasil, menunggu persetujuan Admin',
                     'user'=> $user]);
             }
 
             return $this->error('Registrasi Gagal');
     }
 
-        public function update(Request $request, $email) {
+    public function update(Request $request, $email) {
 
-            $user=User::where('email', $email)->first();
+        $user=User::where('email', $email)->first();
 
             if($user) {
                 $user->update($request->all());
@@ -81,11 +86,11 @@ class UserController extends Controller {
                     'user'=> $user]);
             }
 
-            return $this->error("User tidak ditemukan");
-        }
-
-        public function error($pesan) {
-            return response()->json([ 'success'=> 0,
-                'message'=> $pesan]);
-        }
+        return $this->error("User tidak ditemukan");
     }
+
+    public function error($pesan) {
+        return response()->json([ 'success'=> 0,
+            'message'=> $pesan]);
+    }
+}

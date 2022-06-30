@@ -139,6 +139,9 @@ class RiwayatController extends Controller
             // ]);
 
             if($riwayatRed){
+
+                $this->pushNotif('Redeem Hadiah','Redeem hadiah ',$request->name,' berhasil, dan di proses oleh admin');
+
                 return response()->json([
                     'success' => 1,
                     'message' => 'Redem Berhasil',
@@ -193,6 +196,56 @@ class RiwayatController extends Controller
                 ]);
         }
         return $this->error('Terjadi kesalahan.');
+    }
+
+    public function pushNotif($title, $message) {
+        // $title, $message
+        // Request $request
+
+        // $mData = [
+        //     'title' => $request->title,
+        //     'body' => $request->message
+        // ];
+
+        $mData = [
+            'title' => $title,
+            'body' => $message
+        ];
+
+        $fcm[] = "d3zAUn-VRAeyZfbr8VcI1t:APA91bEwFeg5K0Wo6baOUsiCycBNqOKom-Fw-TN_znqiV7gWT2bVOKOloA07O0BXMm7h0iL4oK0iLe1nTYd6aP6grIWc8mqy7Qk20z2puTvB8tSIRhUibD6qAsskn9iwqLigRuXZXN00";
+
+        $payload = [
+            'registration_ids' => $fcm,
+            'notification' => $mData
+        ];
+
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://fcm.googleapis.com/fcm/send",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_HTTPHEADER => array(
+                "Content-type: application/json",
+                "Authorization: key=AAAA3Zm8IwE:APA91bGc8VfDQa1ccXE_uqYR--6gyTZMK2gtMK6lcQdmm4ipt86S-fLQvcQhPFt46qBMiu4wm3THdAP-p4F9wPxcn5diJ1pS8_aY5-wp8kb3dwYDQsUEdKfVf4T9fzKIgs2ZMuHYneYt"
+            ),
+        ));
+        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($payload));
+
+        $response = curl_exec($curl);
+        curl_close($curl);
+
+        $data = [
+            'success' => 1,
+            'message' => "Push notif success",
+            'data' => $mData,
+            'firebase_response' => json_decode($response)
+        ];
+        return $data;
     }
 
 }
