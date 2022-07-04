@@ -140,7 +140,7 @@ class RiwayatController extends Controller
 
             if($riwayatRed){
 
-                $this->pushNotif('Redeem Hadiah','Redeem hadiah ',$request->name,' berhasil, dan di proses oleh admin');
+                $this->pushNotif('Redeem Hadiah','Redeem hadiah berhasil, dan di proses oleh admin');
 
                 return response()->json([
                     'success' => 1,

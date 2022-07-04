@@ -26,7 +26,8 @@ class User extends Authenticatable
         'atas_nama',
         'nama_akun_ol',
         'foto',
-        'status'
+        'status',
+        'fcm'
     ];
     public function sns(){
     	return $this->hasMany('App\SnProduk');

@@ -66,6 +66,10 @@
                             <option value="Nonaktif" id="Nonaktif">Nonktif</option>
                         </select>
                     </div>
+                    <div class="form-group mb-3">
+                        <label>FCM</label>
+                        <textarea name ="alamat" class="form-control" rows="3" >{{$data->fcm}}</textarea>
+                    </div>
                     <div class="form-group mb-4">
                         <button type="submit" class="btn btn-primary btn-mb-4">Simpan</button>
                     </div>

@@ -2,7 +2,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
-  <title>Admin GPT Poin</title>
+  <title>Admin Global Partner</title>
+  <link rel="shortcut icon" href="{{ asset('img/logo3.ico') }}">
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&amp;display=fallback">
@@ -84,7 +85,7 @@
           
           <div class="user-panel mt-0 pb-2 mb-3 d-flex">
             <div class="image">
-              <img src="dist/img/logo_gpt.png" class="img-circle elevation-2" alt="User Image">
+              <img src="/img/logo3.png" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
               {{-- {{ Auth::user()->name }} --}}
