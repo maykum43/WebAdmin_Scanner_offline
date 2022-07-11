@@ -169,6 +169,14 @@
             </ul>
           </li>
           <li class="nav-item">
+            <a href="{{ route('promosi.index') }}" class="nav-link">
+              <i class="nav-icon fas fa-image"></i>
+              <p>
+                Promosi
+              </p>
+            </a>
+          </li>
+          {{-- <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-image"></i>
               <p>
@@ -178,25 +186,25 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('slider.index') }}" class="nav-link">
+                <a href="{{ route('index_slider') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Slidebar</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('promosis.content') }} " class="nav-link">                  
+                <a href="{{ route('index_content') }} " class="nav-link">                  
                   <i class="far fa-circle nav-icon"></i>
                   <p>Content</p>
                 </a>
-              </li>
+              </li> --}}
               {{-- <li class="nav-item">
                 <a href="{{ route('promosi.index') }}" class="nav-link">
                   <i class="fas fa-image nav-icon"></i>
                   <p>Daftar Promosi Aktif</p>
                 </a>
               </li> --}}
-            </ul>
-          </li>
+            {{-- </ul>
+          </li> --}}
           <!-- menu Redeem Voucher -->
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -274,6 +282,7 @@
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper" style="min-height: 203px;">
+    
     
   <!-- Main Content -->
     @yield('content')

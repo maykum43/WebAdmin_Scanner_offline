@@ -49,3 +49,9 @@ Route::post('totalRedPoin','Api\RiwayatController@totalHadiah');
 // Push Notif
 Route::post('pushNotif', 'Api\RiwayatController@pushNotif'); 
 
+Route::post('get_fcm', 'Api\HadiahController@getAll_fcm');
+
+//Promosi
+Route::post('data_contents','Api\PromosiController@listContent');
+Route::post('data_sliders','Api\PromosiController@listSlider');
+

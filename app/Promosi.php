@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Promosi extends Model
 {
+    protected $table = "promosis";
     protected $fillable = [
-        'id','judul','foto','status','created_at','kategori','ket'
+        'id_promosi', 'judul','status','ket','kategori','created_at','foto'
     ];
 }

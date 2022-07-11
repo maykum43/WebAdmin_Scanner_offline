@@ -10,7 +10,7 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Tambah Data Slidebar</h3>
+                <h3 class="card-title">Tambah Data Promosi</h3>
             </div>
             <div class="card-body">
 
@@ -20,7 +20,7 @@
                 </div>
                 @endif
 
-                <form action="{{ route('store.slidebar')}}" method="POST" role="form" enctype="multipart/form-data">
+                <form action="{{ route('promosi.store')}}" method="POST" role="form" enctype="multipart/form-data">
                     @csrf
 
                     <div class="form-group mb-3">
@@ -28,21 +28,27 @@
                         <input type="text" name="judul" class="form-control @error('judul') is-invalid @enderror"
                             id="judul" value="{{ old('judul') }}" required autocomplete="judul" autofocus>
                     </div>
-
                     <div class="form-group">
-                        <label for="exampleInputFile">Gambar Promosi</label>
+                        <label for="foto">Gambar Promosi</label>
                         {{-- <img class="img-preview img-fluid"> --}}
                         <div class="input-group">
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input @error('req_poin') is-invalid @enderror" 
+                                <input type="file" class="custom-file-input @error('foto') is-invalid @enderror" 
                                 id="foto" name="foto">
                                 <!-- onchange="previewImage()" -->
-                                <label class="custom-file-label text-muted" >*Gambar harus berukuran 1080px * 345px (png)</label>
+                                <label class="custom-file-label text-muted" >*Gambar harus berukuran 1080*384 (png)</label>
                             </div>
                             <!-- <div class="input-group-append">
                                     <span class="input-group-text">Upload</span>
                                 </div> -->
                         </div>
+                    </div>
+                    <div class="form-group" name="kategori">
+                        <label>Kategori</label>
+                        <select class="form-control" id="kategori" name="kategori">
+                            <option value="Content" id="Content">Content</option>
+                            <option value="Slider" id="Slider">Slider</option>
+                        </select>
                     </div>
                     <div class="form-group" name="status">
                         <label>Status</label>
@@ -53,9 +59,9 @@
                     </div>
                     <div class="form-group" name="ket">
                         <label>Keterangan</label>
-                        <textarea class="form-control" rows="3" id="ket" name="ket"></textarea>
+                        <textarea class="form-control" rows="3" placeholder="Enter ..." name="ket"  @error('ket') is-invalid @enderror"
+                        id="ket" value="{{ old('ket') }}" required autocomplete="ket" autofocus></textarea>
                     </div>
-
                     <div class="form-group mb-4">
                         <button type="submit" class="btn btn-primary btn-mb-4">Simpan</button>
                     </div>

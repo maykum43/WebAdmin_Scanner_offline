@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\HadiahModel;
+use App\User;
 
 class HadiahController extends Controller
 {
@@ -40,6 +41,23 @@ class HadiahController extends Controller
                 'req_poin' => $req_poinHadiah
             ]);
         }
+    }
+
+    public function getAll_fcm(Request $request)
+    {
+        // $hadiahs = HadiahModel::where('status','Aktif')->get();
+        // ->where('fcm' != NULL)
+        $data_fcm = User::select('fcm')->whereNotNull('fcm')->get();
+        // SELECT `fcm` FROM `users` WHERE `fcm` IS NOT NULL
+            if($data_fcm == null){
+                return $this->error('Data FCM Kosong');
+            }else{
+            return response()->json([
+                'success' => 1,
+                'message' => 'Get Data FCM berhasil',
+                'Data FCM' => $data_fcm
+            ]);
+            }
     }
 
     

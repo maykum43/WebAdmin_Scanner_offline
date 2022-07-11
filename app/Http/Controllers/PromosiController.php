@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Promosi;
+use Session;
 
 class PromosiController extends Controller
 {
@@ -11,7 +13,6 @@ class PromosiController extends Controller
     {
         $this->middleware('auth');
     }
-
 
     /**
      * Display a listing of the resource.
@@ -21,13 +22,12 @@ class PromosiController extends Controller
     public function index(Request $request)
     {
         if($request->has('cari_promosi')){
-            $promosis = Promosi::where('judul','LIKE','%'.$request->cari_promosi.'%')->paginate(10);
+            $promosis = Promosi::where('judul','LIKE','%'.$request->cari_promosi.'%')->orderBy('created_at','desc')->paginate(10);
         
         }else{
-            $promosis = Promosi::paginate(10);
-            // where('status','Aktif')->
+            $promosis = Promosi::orderBy('created_at','desc')->paginate(10);
         }
-        return view('promosi/index_promosi',compact('promosis'));
+        return view('promosi/index',compact('promosis'));
     }
 
     /**
@@ -37,7 +37,7 @@ class PromosiController extends Controller
      */
     public function create()
     {
-        return view('promosi.create_promosi');
+        return view('promosi.create');
     }
 
     /**
@@ -48,6 +48,7 @@ class PromosiController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $fileName ='';
 
         if($request->foto->getClientOriginalName()){
@@ -61,6 +62,7 @@ class PromosiController extends Controller
 
         // return view('hadiah/index_hadiah')->with('success','Data berhasil di simpan');
         return redirect()->route('promosi.index')->with('success','Data berhasil di simpan');
+        
     }
 
     /**
@@ -82,7 +84,7 @@ class PromosiController extends Controller
      */
     public function edit($id)
     {
-        $data = Promosi::where('id',$id)->first();
+        $data = Promosi::where('id_promosi',$id)->first();
         return view('promosi.edit_promosi', compact('data'));
     }
 
@@ -101,11 +103,13 @@ class PromosiController extends Controller
             $request->foto->storeAs('public/Promosi/',$fileName);
         }
 
-        $simpan = Promosi::where('id',$id)->update([
+        $simpan = Promosi::where('id_promosi',$id)->update([
             // dd($request->all());
-                'judul' =>$request->judul,
+                'judul' =>$request->name,
                 'foto' =>$fileName,
+                'kategori' =>$request->kategori,
                 'status' =>$request->status,
+                'ket' =>$request->ket,
             ]);
     
             if(!$simpan){
@@ -120,30 +124,45 @@ class PromosiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Promosi $promosi)
     {
-        //
+        // $delete = $promosi->where('id_promosi',$id)->delete();
+
+        // if(!$delete){
+        //     return redirect()->route('promosi.index')->with('error','Data gagal di dihapus');
+        // }
+        // return redirect()->route('promosi.index')->with('success','Data berhasil di hapus');
     }
 
-    public function Delete($id, Promosi $promosis){
-        $hapus = $promosis->where('id',$id)->delete();
+    public function indexContent(Request $request)
+    {
+        if($request->has('cari_content')){
+            $contents = Promosi::where('judul','LIKE','%'.$request->cari_content.'%')->orWhere('kategori','Content')->orderBy('created_at','desc')->paginate(10);
+        
+        }else{
+            $contents = Promosi::where('kategori','Content')->orderBy('created_at','desc')->paginate(10);
+        }
+        return view('promosi/index_content',compact('contents'));
+    }
 
-        if(!$hapus){
+    public function indexSlider(Request $request)
+    {
+        if($request->has('cari_hadiah')){
+            $hadiahs = Promosi::where('name','LIKE','%'.$request->cari_hadiah.'%')->paginate(10);
+        
+        }else{
+            $hadiahs = Promosi::paginate(10);
+        }
+        return view('hadiah/index_hadiah',compact('hadiahs'));
+    }
+
+    public function Delete($id, Promosi $promosi){
+        $delete = $promosi->where('id_promosi',$id)->delete();
+
+        if(!$delete){
             return redirect()->route('promosi.index')->with('error','Data gagal di dihapus');
         }
         return redirect()->route('promosi.index')->with('success','Data berhasil di hapus');
     }
 
-    public function Slidebar(Request $request)
-    {
-        if($request->has('cari_promosi')){
-            $promosis = Promosi::where('judul','LIKE','%'.$request->cari_promosi.'%')->paginate(10);
-        
-        }else{
-            $promosis = Promosi::paginate(10);
-            // where('status','Aktif')->
-        }
-        return view('promosi/index_promosi',compact('promosis'));
-    }
-    
 }

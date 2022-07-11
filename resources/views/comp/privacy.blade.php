@@ -1,7 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
-<strong>Terms &amp; Conditions</strong> <p>
+<div class="content-header">
+  <div class="container-fluid">
+  </div><!-- /.container-fluid -->
+</div>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title"><strong>Terms &amp; Conditions</strong></h3>
+    </div>
+    <div class="card-body">
+ <p>
               By downloading or using the app, these terms will
               automatically apply to you – you should make sure therefore
               that you read them carefully before using the app. You’re not
@@ -102,7 +114,10 @@
               If you have any questions or suggestions about my
               Terms and Conditions, do not hesitate to contact me
               at support01@cctvbandung.co.id.
-            </p>
-  
+              /p>
+            </div>
+            </div>
+          </div>
+        </section> 
       
 @endsection

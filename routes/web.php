@@ -62,7 +62,6 @@ Route::delete('DeleteAll', 'SNController@deleteAll');
 Route::get('/cari_sn','SNController@cariSN')->name('cari_sn');
 Route::get('/cari_user','CustomerController@cariSN')->name('cari_user');
 
-
 // Route::post('/cari_sn','SNController@cariSN')->name('cari_sn');
 
 Route::resource('/hadiah', 'HadiahController');
@@ -76,14 +75,7 @@ Route::get('/PoinCust', 'HadiahController@viewPoinCust')->name('PoinUser');
 Route::resource('/promosi', 'PromosiController');
 Route::get('/DeletePromosi/{id}','PromosiController@Delete')->name('promosi.delete');
 
-Route::get('/promosi-slidebar', 'PromosisController@IndexSlidebar')->name('promosis.slidebar');
-Route::get('/add-slidebar','PromosisController@createSlidebar')->name('create.slidebar');
-Route::post('/create-slidebar','PromosisController@storeSlidebar')->name('store.slidebar');
-Route::get('/edi-slidebar/{id}', 'PromosisController@editSlidebar')->name('edit.slidebar');
-Route::post('/update_slidebar/{id}','PromosisController@updateSlidebar')->name('update.slidebar');
-
-
-Route::get('/promosi-content', 'PromosisController@IndexContent')->name('promosis.content');
-
-Route::resource('/slider', 'SliderController');
-Route::resource('/content', 'ContentController');
+Route::resource('promosi', 'PromosiController');
+Route::get('/Delete/{id}','PromosiController@Delete')->name('promosi.delete');
+Route::get('index_slider','PromosiController@IndexSlider')->name('index_slider');
+Route::get('index_content','PromosiController@IndexContent')->name('index_content');
