@@ -74,8 +74,7 @@ Route::get('/PoinCust', 'HadiahController@viewPoinCust')->name('PoinUser');
 
 Route::resource('/promosi', 'PromosiController');
 Route::get('/DeletePromosi/{id}','PromosiController@Delete')->name('promosi.delete');
-
-Route::resource('promosi', 'PromosiController');
-Route::get('/Delete/{id}','PromosiController@Delete')->name('promosi.delete');
+Route::get('/StatusPromosi/{id}','PromosiController@Nonaktif')->name('promosi.nonaktif');
+// Route::resource('promosi', 'PromosiController');
 Route::get('index_slider','PromosiController@IndexSlider')->name('index_slider');
 Route::get('index_content','PromosiController@IndexContent')->name('index_content');

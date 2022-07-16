@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\RiwRedModel;
+use App\User;
 
 class RedeemPoinController extends Controller
 {
@@ -115,7 +116,7 @@ class RedeemPoinController extends Controller
         $req_poinHadiah = HadiahModel::where('name',$request->name)->get('req_poin');
         
     }
-    public function selesai($id)
+    public function selesai($id,User $user)
     {
         $update = RiwRedModel::where('id',$id)->update([
             'status' => 'Selesai',
@@ -128,6 +129,7 @@ class RedeemPoinController extends Controller
         }
         return redirect()->route('redeemPoin.index')->with('success','Data berhasil diselesaikan');
     }
+    
     public function HardDelete($id)
     {
         $delete = RiwRedModel::where('id',$id)->delete();

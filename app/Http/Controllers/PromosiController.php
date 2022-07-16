@@ -105,7 +105,7 @@ class PromosiController extends Controller
 
         $simpan = Promosi::where('id_promosi',$id)->update([
             // dd($request->all());
-                'judul' =>$request->name,
+                'judul' =>$request->judul,
                 'foto' =>$fileName,
                 'kategori' =>$request->kategori,
                 'status' =>$request->status,
@@ -163,6 +163,19 @@ class PromosiController extends Controller
             return redirect()->route('promosi.index')->with('error','Data gagal di dihapus');
         }
         return redirect()->route('promosi.index')->with('success','Data berhasil di hapus');
+    }
+
+    public function Nonaktif(Request $request, $id)
+    {
+        $simpan = Promosi::where('id_promosi',$id)->update([
+            // dd($request->all());
+                'status' =>'Nonaktif'
+            ]);
+    
+            if(!$simpan){
+                return redirect()->route('promosi.index')->with('error','Data gagal di update');
+            }
+            return redirect()->route('promosi.index')->with('success','data berhasil di update');
     }
 
 }

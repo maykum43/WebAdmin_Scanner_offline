@@ -33,7 +33,7 @@ class RiwayatController extends Controller
 
     public function his_sn(Request $request){ 
 
-        $his = RiwayatSN::where('email','LIKE','%'.$request->his_sn.'%')->orderBy('created_at','desc')->get();
+        $his = RiwayatSN::where('email',$request->email)->orderBy('created_at','desc')->get();
 
         if($his){
                return response()->json([
@@ -172,7 +172,7 @@ class RiwayatController extends Controller
             return response()->json([
             'success' => 1,
             'message' => 'Hasil Riwayat',
-            'riwayat' => $riwred
+            'riwayat_redeem' => $riwred
             ]);
      }
      return $this->error('Belum ada history Redeem.');
@@ -186,31 +186,32 @@ class RiwayatController extends Controller
             return response()->json([
             'success' => 1,
             'message' => 'Data hadiah '.$request->email.' berhasil diambil',
-            'riwayat' => $countHad
+            'jml_redeem' => $countHad
             ]);
         }elseif ($countHad == 0 || $countHad == null) {
             return response()->json([
                 'success' => 1,
                 'message' => 'Belum ada history Redeem',
-                'riwayat' => 0
+                'jml_redeem' => 0
                 ]);
         }
         return $this->error('Terjadi kesalahan.');
     }
 
-    public function pushNotif($title, $message) {
+    // $title, $message
+    public function pushNotif(Request $request) {
         // $title, $message
         // Request $request
 
-        // $mData = [
-        //     'title' => $request->title,
-        //     'body' => $request->message
-        // ];
-
         $mData = [
-            'title' => $title,
-            'body' => $message
+            'title' => $request->title,
+            'body' => $request->message
         ];
+
+        // $mData = [
+        //     'title' => $title,
+        //     'body' => $message
+        // ];
 
         $fcm[] = "d3zAUn-VRAeyZfbr8VcI1t:APA91bEwFeg5K0Wo6baOUsiCycBNqOKom-Fw-TN_znqiV7gWT2bVOKOloA07O0BXMm7h0iL4oK0iLe1nTYd6aP6grIWc8mqy7Qk20z2puTvB8tSIRhUibD6qAsskn9iwqLigRuXZXN00";
 

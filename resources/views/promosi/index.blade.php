@@ -76,8 +76,8 @@
                                     <a href="{{ route('promosi.edit',$data->id_promosi)}}" 
                                         class="btn btn-warning btn-sm">Edit</a>
                                     {{-- {{ route('Hdelete_user',$data->id_promosi)}} --}}
-                                    <a href="{{ route('promosi.delete',$data->id_promosi)}}"
-                                        class="btn btn-danger btn-sm">Hapus</a>
+                                    <a href="{{ route('promosi.nonaktif',$data->id_promosi)}}"
+                                        class="btn btn-danger btn-sm">Non Aktif</a>
                                 </div>
                             </td>
                         </tr>

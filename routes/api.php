@@ -47,7 +47,7 @@ Route::post('riwred','Api\RiwayatController@riwred');
 Route::post('totalRedPoin','Api\RiwayatController@totalHadiah');
 
 // Push Notif
-Route::post('pushNotif', 'Api\RiwayatController@pushNotif'); 
+Route::post('pushNotif', 'Api\RiwayatController@pushNotif');
 
 Route::post('get_fcm', 'Api\HadiahController@getAll_fcm');
 
